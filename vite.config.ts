@@ -3,7 +3,6 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-// https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
@@ -15,4 +14,12 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // NUEVO: Ayuda con cache en dev para imports como el tuyo.
+  optimizeDeps: {
+    include: ['react', 'react-dom'], // Si usas externals.
+  },
+  // Opcional: Para prod, minify y sourcemaps.
+  build: mode === 'production' ? {
+    sourcemap: true, // Debug easier.
+  } : {},
 }));

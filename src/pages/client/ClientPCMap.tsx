@@ -4,10 +4,12 @@ import { initializePCs, type PC } from '@/utils/mockData';
 import { Monitor, Zap, Wrench } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
+import { useSidebar } from '@/contexts/SidebarContext'; // NUEVO: Para estado del sidebar.
 
 export default function ClientPCMap() {
   const [pcs, setPcs] = useState<PC[]>([]);
   const navigate = useNavigate();
+  const { isOpen } = useSidebar(); // NUEVO: Obtén si sidebar está abierto.
   const { toast } = useToast();
 
   useEffect(() => {
@@ -68,7 +70,7 @@ export default function ClientPCMap() {
   return (
     <div className="flex min-h-screen w-full bg-background">
       <Sidebar />
-      <main className="flex-1 p-8">
+      <main className={`flex-1 p-8 transition-all duration-300 ${isOpen ? 'ml-64' : 'mx-auto'}`}> {/* MODIFICACIÓN: Centra/expande según sidebar. */}
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl font-bold neon-text mb-2">Mapa de PCs</h1>
           <p className="text-muted-foreground mb-8">Selecciona una PC disponible para reservar</p>

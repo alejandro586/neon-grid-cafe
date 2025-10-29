@@ -7,12 +7,14 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { AlertCircle } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useSidebar } from '@/contexts/SidebarContext'; // NUEVO: Para estado del sidebar.
 
 export default function ClientReport() {
   const [subject, setSubject] = useState('');
   const [pcNumber, setPcNumber] = useState('');
   const [description, setDescription] = useState('');
   const { user } = useAuth();
+  const { isOpen } = useSidebar(); // NUEVO: Obtén si sidebar está abierto.
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -57,7 +59,7 @@ export default function ClientReport() {
   return (
     <div className="flex min-h-screen w-full bg-background">
       <Sidebar />
-      <main className="flex-1 p-8">
+      <main className={`flex-1 p-8 transition-all duration-300 ${isOpen ? 'ml-64' : 'mx-auto'}`}> {/* MODIFICACIÓN: Centra/expande según sidebar. */}
         <div className="max-w-2xl mx-auto">
           <div className="flex items-center gap-3 mb-8">
             <AlertCircle className="h-8 w-8 text-primary" />

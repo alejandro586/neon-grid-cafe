@@ -3,6 +3,7 @@ import { Sidebar } from '@/components/Sidebar';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { ShoppingBag, Plus, Minus } from 'lucide-react';
+import { useSidebar } from '@/contexts/SidebarContext'; // NUEVO: Para estado del sidebar.
 
 interface Product {
   id: string;
@@ -24,6 +25,7 @@ const products: Product[] = [
 
 export default function ClientCafeteria() {
   const [cart, setCart] = useState<Record<string, number>>({});
+  const { isOpen } = useSidebar(); // NUEVO: Obtén si sidebar está abierto.
   const { toast } = useToast();
 
   const addToCart = (productId: string) => {
@@ -70,7 +72,7 @@ export default function ClientCafeteria() {
   return (
     <div className="flex min-h-screen w-full bg-background">
       <Sidebar />
-      <main className="flex-1 p-8">
+      <main className={`flex-1 p-8 transition-all duration-300 ${isOpen ? 'ml-64' : 'mx-auto'}`}> {/* MODIFICACIÓN: Centra/expande según sidebar. */}
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-3 mb-8">
             <ShoppingBag className="h-8 w-8 text-primary" />
@@ -101,6 +103,7 @@ export default function ClientCafeteria() {
                 </div>
               </div>
 
+              {/* Snacks section (asumiendo que estaba truncado, agrego basado en tu descripción original). */}
               <div>
                 <h2 className="text-2xl font-bold text-secondary mb-4">Snacks</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

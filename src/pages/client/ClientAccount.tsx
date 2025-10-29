@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { User, Calendar, X } from 'lucide-react';
 import { initializePCs } from '@/utils/mockData';
+import { useSidebar } from '@/contexts/SidebarContext'; // NUEVO: Para estado del sidebar.
 
 interface Reservation {
   id: string;
@@ -21,6 +22,7 @@ export default function ClientAccount() {
   const [reservations, setReservations] = useState<Reservation[]>([]);
   const [name, setName] = useState(user?.name || '');
   const [email, setEmail] = useState(user?.email || '');
+  const { isOpen } = useSidebar(); // NUEVO: Obtén si sidebar está abierto.
   const { toast } = useToast();
 
   useEffect(() => {
@@ -71,7 +73,7 @@ export default function ClientAccount() {
   return (
     <div className="flex min-h-screen w-full bg-background">
       <Sidebar />
-      <main className="flex-1 p-8">
+      <main className={`flex-1 p-8 transition-all duration-300 ${isOpen ? 'ml-64' : 'mx-auto'}`}> {/* MODIFICACIÓN: Centra/expande según sidebar. */}
         <div className="max-w-4xl mx-auto space-y-8">
           <div className="flex items-center gap-3">
             <User className="h-8 w-8 text-primary" />

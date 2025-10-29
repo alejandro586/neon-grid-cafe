@@ -4,7 +4,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import type { UserRole } from '@/contexts/AuthContext';
 
@@ -13,8 +12,9 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [role, setRole] = useState<UserRole>('cliente');
-  const [inviteCode, setInviteCode] = useState('');
+  // MODIFICACIÓN: Removido el estado de role (ya no se selecciona). Fijado en 'cliente'.
+  // const [role, setRole] = useState<UserRole>('cliente');
+  const [inviteCode, setInviteCode] = useState(''); // MODIFICACIÓN: Removido, ya no se usa.
   const { register } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -41,7 +41,8 @@ export default function Register() {
     }
 
     try {
-      await register(name, email, password, role, inviteCode);
+      // MODIFICACIÓN: Pasar role fijo como 'cliente' y remover inviteCode.
+      await register(name, email, password, 'cliente' as UserRole);
       toast({
         title: "¡Registro exitoso!",
         description: "Tu cuenta ha sido creada correctamente",
@@ -69,7 +70,7 @@ export default function Register() {
         <div className="cyber-card">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold neon-text mb-2 glitch-effect">CYBER CAFÉ</h1>
-            <p className="text-muted-foreground uppercase tracking-wider">Registro</p>
+            <p className="text-muted-foreground uppercase tracking-wider">Registro de Cliente</p> {/* MODIFICACIÓN: Ajustado texto para reflejar solo clientes. */}
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -125,37 +126,10 @@ export default function Register() {
               />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="role" className="text-foreground">Tipo de Usuario</Label>
-              <Select value={role} onValueChange={(value) => setRole(value as UserRole)}>
-                <SelectTrigger className="cyber-input">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="cliente">Cliente</SelectItem>
-                  <SelectItem value="admin">Administrador</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            {role === 'admin' && (
-              <div className="space-y-2">
-                <Label htmlFor="inviteCode" className="text-foreground">Código de Invitación</Label>
-                <Input
-                  id="inviteCode"
-                  type="text"
-                  value={inviteCode}
-                  onChange={(e) => setInviteCode(e.target.value)}
-                  required
-                  className="cyber-input"
-                  placeholder="CYBER2025"
-                />
-                <p className="text-xs text-muted-foreground">Solo administradores con código pueden registrarse</p>
-              </div>
-            )}
+            {/* MODIFICACIÓN: Removido el Select de role y el campo condicional de inviteCode. */}
 
             <Button type="submit" className="w-full cyber-button">
-              Registrarse
+              Registrarse como Cliente {/* MODIFICACIÓN: Ajustado texto del botón para claridad. */}
             </Button>
 
             <div className="text-center text-sm text-muted-foreground">

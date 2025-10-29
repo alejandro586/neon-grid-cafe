@@ -9,6 +9,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { initializePCs, type PC } from '@/utils/mockData';
 import { Calendar } from 'lucide-react';
+import { useSidebar } from '@/contexts/SidebarContext'; // NUEVO: Para estado del sidebar.
 
 export default function ClientReserve() {
   const [searchParams] = useSearchParams();
@@ -21,6 +22,7 @@ export default function ClientReserve() {
   const [time, setTime] = useState('');
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { isOpen } = useSidebar(); // NUEVO: Obtén si sidebar está abierto.
   const { toast } = useToast();
 
   useEffect(() => {
@@ -65,7 +67,7 @@ export default function ClientReserve() {
   return (
     <div className="flex min-h-screen w-full bg-background">
       <Sidebar />
-      <main className="flex-1 p-8">
+      <main className={`flex-1 p-8 transition-all duration-300 ${isOpen ? 'ml-64' : 'mx-auto'}`}> {/* MODIFICACIÓN: Centra/expande según sidebar. */}
         <div className="max-w-2xl mx-auto">
           <div className="flex items-center gap-3 mb-8">
             <Calendar className="h-8 w-8 text-primary" />
