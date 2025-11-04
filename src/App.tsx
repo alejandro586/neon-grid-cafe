@@ -19,6 +19,8 @@ import ClientDemand from "./pages/client/ClientDemand";
 import ClientAccount from "./pages/client/ClientAccount";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminDataAnalysis from "./pages/admin/AdminDataAnalysis";
+import AdminManagePCs from "./pages/admin/AdminManagePCs";
+import AdminManageUsers from "./pages/admin/AdminManageUsers";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -50,6 +52,8 @@ const App = () => {
               <Route path="/dashboard/admin" element={<AdminDashboard />} />
               <Route path="/dashboard/admin/demand" element={<ClientDemand />} />
               <Route path="/dashboard/admin/data-analysis" element={<AdminDataAnalysis />} />
+              <Route path="/dashboard/admin/manage-pcs" element={<AdminManagePCs />} />
+              <Route path="/dashboard/admin/manage-users" element={<AdminManageUsers />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
