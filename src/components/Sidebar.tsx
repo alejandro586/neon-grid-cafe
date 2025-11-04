@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Monitor, Calendar, TrendingUp, User, Users, Settings, LogOut, ShoppingBag, AlertCircle } from 'lucide-react';
+import { Menu, X, Monitor, Calendar, TrendingUp, User, Users, Settings, LogOut, ShoppingBag, AlertCircle, BarChart3 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 
@@ -25,6 +25,7 @@ export const Sidebar = () => {
     { to: '/dashboard/admin/manage-pcs', icon: Settings, label: 'Gestionar PCs' },
     { to: '/dashboard/admin/manage-users', icon: Users, label: 'Gestionar Usuarios' },
     { to: '/dashboard/admin/demand', icon: TrendingUp, label: 'Predicción Demanda' },
+    { to: '/dashboard/admin/data-analysis', icon: TrendingUp, label: 'Análisis de Datos' },
   ];
 
   const links = user.role === 'admin' ? adminLinks : clientLinks;

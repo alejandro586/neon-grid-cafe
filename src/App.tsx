@@ -18,6 +18,7 @@ import ClientReport from "./pages/client/ClientReport";
 import ClientDemand from "./pages/client/ClientDemand";
 import ClientAccount from "./pages/client/ClientAccount";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminDataAnalysis from "./pages/admin/AdminDataAnalysis";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -48,6 +49,7 @@ const App = () => {
               <Route path="/dashboard/cliente/my-account" element={<ClientAccount />} />
               <Route path="/dashboard/admin" element={<AdminDashboard />} />
               <Route path="/dashboard/admin/demand" element={<ClientDemand />} />
+              <Route path="/dashboard/admin/data-analysis" element={<AdminDataAnalysis />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
